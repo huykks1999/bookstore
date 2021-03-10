@@ -1,0 +1,33 @@
+<div class="container" style="height: 70vh;">
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+          <tr>
+              <th>STT</th>
+              <th>Date</th>
+              <th>Total</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th></th>
+          </tr>
+      </thead>
+  
+      <tbody *ngFor="let list of listOrderCurrent; let i = index">
+          <tr>
+              <td>{{i+1}}</td>
+              <td>{{list.createDate}}</td>
+              <td>{{list.total_money}}đ</td>
+              <td>{{list.name}}</td>
+              <td>{{list.phone}}</td>
+              <td>{{list.address}}</td>
+              <td>{{list.payment}}</td>
+              <td>{{list.status}}</td>
+              <td><button (click)="detail(list.id)" class="btn btn-primary">Xem chi tiết</button></td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+
+  <app-pagination *ngIf="listOrders.length != 0" [numberProduct]="listOrders.length" (OutCurrentPage)="paging($event)"></app-pagination>

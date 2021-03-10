@@ -1,0 +1,225 @@
+<div class="container fas fa-truck">
+  Free giao hàng toàn quốc
+</div>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <i style="font-size: 50px; color: white;" class="fas fa-home"></i>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a style="font-size: 3vw; color: whitesmoke; margin-left: 3vw;" class="nav-link" href="#">T - Book Store </a>
+                </li>
+            </ul>
+
+            <div class="form-inline my-2 my-lg-0">
+                <div class="collapse navbar-collapse nav-control" id="navbar" *ngIf="isAuthenticated">
+                    <i class="tikicon icon-tracking"></i>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/public/order"  role="button">
+                                Theo dõi<br>đơn hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="collapse navbar-collapse nav-control" id="navbar" *ngIf="!isAuthenticated">
+                    <i class="tikicon icon-user"></i>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" #modal href="#" data-toggle="modal" data-target="#modalLRForm">
+                                Đăng nhập <br> tài khoản
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse nav-control" id="navbar" *ngIf="isAuthenticated">
+                    <i class="tikicon icon-user"></i>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="user-controls" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Chào<br>{{emailCus}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="user-controls">
+                                <a class="dropdown-item" data-toggle="modal" data-target="#classModal">Thông tin cá nhân</a>
+                                <a class="dropdown-item" (click)="logout()">Thoát tài khoản</a>
+                                <!-- (click)="logout()" -->
+                            </div> 
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse nav-control" id="navbar">
+                    <i class="tikicon icon-cart"></i>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown" >
+                            <span (click)="toCart()" class="nav-link" style="cursor: pointer; outline: none;">
+                                Giỏ hàng
+                                <span class="cart-count">{{countBookInCart}}</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+<!--Modal: Login / Register Form-->
+<div class="modal fade"  id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <!--Content-->
+      <div class="modal-content">
+  
+        <!--Modal cascading tabs-->
+        <div class="modal-c-tabs">
+  
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#login" role="tab"><i class="fas fa-user mr-1"></i>
+                Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#register" role="tab"><i class="fas fa-user-plus mr-1"></i>
+                Register</a>
+            </li>
+          </ul>
+  
+          <!-- Tab panels -->
+          <div class="tab-content">
+            <!--Panel 7-->
+            <div class="tab-pane fade in show active" id="login" role="tabpanel">
+  
+              <!--Body-->
+              <div class="modal-body">
+                <form [formGroup]="LoginForm" (ngSubmit)="submitLogin()">
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input formControlName="email" type="text" class="form-control" id="email"
+                            placeholder="Enter your email">
+                        <div *ngIf="!this.LoginForm.controls.email.valid &&  this.LoginForm.controls.email.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="passWord">Your PassWord</label>
+                      <input formControlName="passWord" type="password" class="form-control" id="passWord"
+                          placeholder="Enter your password">
+                      <div *ngIf="!this.LoginForm.controls.passWord.valid &&  this.LoginForm.controls.passWord.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+                  </div> 
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <div *ngIf=alertLogin class=" col-md-9 check alert alert-warning" role="alert">
+                      <strong>Tài khoản hoặc mật khẩu không đúng!</strong> Please try again!
+                    </div>
+                </form>
+              </div>
+              <!--Footer-->
+              <div class="modal-footer">
+                <button type="button" #closeButton class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+              </div>
+  
+            </div>
+            <!--/.Panel 7-->
+  
+            <!--Panel 8-->
+            <div class="tab-pane fade" id="register" role="tabpanel">
+  
+              <!--Body-->
+              <div class="modal-body">
+                <form [formGroup]="RegisterForm" (ngSubmit)="submitSignUp()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input formControlName="name" type="text" class="form-control" id="name"
+                            placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input formControlName="email" type="text" class="form-control" id="email"
+                            placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="passWord">Pass Word</label>
+                        <input formControlName="passWord" type="text" class="form-control" id="passWord"
+                            placeholder="Enter your passWord">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input formControlName="phone" type="text" class="form-control" id="phone"
+                            placeholder="Enter your phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input formControlName="address" type="text" class="form-control" id="address"
+                            placeholder="Enter your address">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="role">Role</label>
+                        <input formControlName="role" type="text" class="form-control" id="role"
+                            placeholder="Enter role product">
+                    </div> -->
+                    <button type="submit" class="btn btn-success">Sign Up</button>
+                </form>
+              </div>
+              <!--Footer-->
+              <div class="modal-footer">
+                <button type="button" #closeButton class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal" (click)="close()">Close</button>
+              </div>
+            </div>
+            <!--/.Panel 8-->
+          </div>
+  
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  <!--Modal: Login / Register Form-->
+
+
+
+  <!-- Modal customer Information -->
+  <div id="classModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="classInfo" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="classModalLabel">
+                Customer Information
+              </h4>
+        </div>
+        <div class="modal-body">
+          <table id="classTable" class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Phone</th>
+                <th>Address</th>
+              </tr>  
+              <tr>
+                <td>{{customerLogined?.id}}</td>
+                <td>{{customerLogined?.name}}</td>
+                <td>{{customerLogined?.email}}</td>
+                <td>{{customerLogined?.passWord}}</td>
+                <td>{{customerLogined?.phone}}</td>
+                <td>{{customerLogined?.address}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,77 @@
+
+
+
+<!-- slide -->
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/image/slide5.jpg" alt="Los Angeles">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/image/slide6.jpg" alt="Chicago">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/image/slide4.jpg" alt="New York">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      <app-search *ngIf="listBookCurrent.length!=0"  [listBook]="this.listBookCurrent" (listSearched)="search($event)"></app-search>
+    </div>
+  </div>
+  
+</div>
+
+
+<!-- danh muc -->
+<div class="container">
+    <div class="row">
+      <div class="col-md-3 content-left">
+        <h4>
+          Danh Mục Sản Phẩm
+        </h4>
+        <p class="type-book-item" (click)="selectTP(0)">Tất Cả</p>
+        <ul *ngFor="let listTP of listTypeBook">
+            <li class="type-book-item" (click)="selectTP(listTP.id)" [ngClass]="{'active':listTP.id == currentTypeBook}">{{listTP.name}}</li>
+        </ul>
+      </div>
+      <div class="col-md-9 content-right">
+        <div style="display: flex; flex-wrap: wrap;">
+            <ul *ngFor="let list of listBookCurrent; let i = index" style="display: inline-block; width: 250px;">
+                <li class="image" (click)="detail(list.id)">
+                  <img src="assets/image/{{list.image}}" alt="Error"/>
+                </li>
+                <li class="name">{{list.name}}</li>
+                <li class="price">{{list.price}}đ</li>
+                <button class="btn btn-success" (click)="addProductToCart(list)">Thêm vào giỏ hàng</button>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<app-pagination *ngIf="listBook.length != 0" [numberProduct]="listBook.length" (OutCurrentPage)="paging($event)"></app-pagination>
+

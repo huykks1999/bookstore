@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Tháng</th>
+        <!-- <th scope="col">Số lượng sản phẩm bán ra</th> -->
+        <th scope="col">Số lượng đơn hàng</th>
+        <th scope="col">Doanh Thu</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of listCC">
+      <tr>
+        <th scope="row">{{item.month}}</th>
+        <td>{{item.sldh}}</td>
+        <td>{{item.doanhthu}}</td>
+      </tr>
+    </tbody>
+  </table>

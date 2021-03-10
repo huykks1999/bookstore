@@ -1,0 +1,38 @@
+
+    <div class="container">
+      <div class="body">
+        <div class="row">
+          <div class="col-md-5 left">
+            <img src="assets/image/{{book?.image}}" alt="Error"/>
+          </div>
+          <div class="col-md-7 right">
+            <p class="name">{{book?.name}}<br><i>(Tái bản 2020)</i><p>
+            <div class="rate">
+              <span>Đánh giá: </span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </div>
+            <p class="sale-price">{{book?.sale_price}}đ <i>Giá hấp dẫn</i></p>
+            <p class="price" >Giá gốc: {{book?.price}}đ</p>
+            <!-- <p>Decription: {{book?.description}}</p> -->
+            <p>Tác giả: {{book?.author}}</p>
+            <p>Nhà xuất bản: {{book?.nbx}}</p>
+            <p>Số trang: {{book?.pages_number}}</p>
+            <p>Thể loại sách: {{book?.typeBook.name}}</p>
+            <br>
+            <button class="btn btn-success" (click)="addProductToCart()">Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+    
+    <div class="container" style="margin-top: 2vw;">
+      <p style="font-size: 1.5vw; font-weight: 400;">MÔ TẢ SẢN PHẨM</p>
+      <div class="description">
+        <p>{{book?.description}}
+          Người giàu có nhất thành Babylon (tiếng Anh: The Richest Man in Babylon) được xem là một trong những tác phẩm truyền cảm hứng lớn nhất về chủ đề tiết kiệm, kế hoạch tài chính và sự giàu có cá nhân. Tác phẩm được viết bởi doanh nhân, nhà văn Mỹ George Samuel Clason vào năm 1926, kể về cách tiết kiệm, buôn bán và làm giàu của người dân ở thành Babylon cổ xưa.</p>
+      </div>
+    </div>

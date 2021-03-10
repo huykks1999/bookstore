@@ -1,0 +1,214 @@
+<h3 style="text-align: center;">Quản lý sản phẩm theo loại</h3>
+
+<a href="/admin/typebook" type="button" class="btn btn-warning" style="margin: 15px;">Back</a>
+
+<button type="button" class="btn btn-success addbutton" data-toggle="modal" data-target="#addProduct">Add New Book</button>
+
+<div id="addProduct" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">Add New Product</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addForm" (ngSubmit)="addProduct()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input formControlName="name" type="text" class="form-control" id="name"
+                    placeholder="Enter name product">
+                    <div *ngIf="!this.addForm.controls.name.valid &&  this.addForm.controls.name.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input formControlName="description" type="text" class="form-control" id="description"
+                  placeholder="Enter description product">
+                  <div *ngIf="!this.addForm.controls.description.valid &&  this.addForm.controls.description.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input formControlName="price" type="text" class="form-control" id="price"
+                    placeholder="Enter price product">
+                    <div *ngIf="!this.addForm.controls.price.valid &&  this.addForm.controls.price.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+              <label for="sale_price">Sale Price</label>
+              <input formControlName="sale_price" type="text" class="form-control" id="sale_price"
+                  placeholder="Enter sale_price product">
+                  <div *ngIf="!this.addForm.controls.sale_price.valid &&  this.addForm.controls.sale_price.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input formControlName="image" type="text" class="form-control" id="image"
+                    placeholder="Enter image product">
+                    <div *ngIf="!this.addForm.controls.image.valid &&  this.addForm.controls.image.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+                <label for="pages_number">pages_number</label>
+                <input formControlName="pages_number" type="text" class="form-control" id="pages_number"
+                    placeholder="Enter pages_number product">
+                    <div *ngIf="!this.addForm.controls.pages_number.valid &&  this.addForm.controls.pages_number.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="type_Book_Id">type_Book_Id</label>
+                <input formControlName="type_Book_Id" type="text" class="form-control" id="type_Book_Id"
+                    placeholder="Enter type_Book_Id product">
+                    <div *ngIf="!this.addForm.controls.type_Book_Id.valid &&  this.addForm.controls.type_Book_Id.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div> -->
+            <div class="form-group">
+                <label for="nbx">nbx</label>
+                <input formControlName="nbx" type="text" class="form-control" id="nbx"
+                    placeholder="Enter nbx product">
+                    <div *ngIf="!this.addForm.controls.nbx.valid &&  this.addForm.controls.nbx.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+                <label for="author">author</label>
+                <input formControlName="author" type="text" class="form-control" id="author"
+                    placeholder="Enter author product">
+                    <div *ngIf="!this.addForm.controls.author.valid &&  this.addForm.controls.author.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+            <div class="form-group">
+              <label for="quantity">quantity</label>
+              <input formControlName="quantity" type="text" class="form-control" id="quantity"
+                  placeholder="Enter quantity product">
+                  <div *ngIf="!this.addForm.controls.quantity.valid &&  this.addForm.controls.quantity.touched" class="alert alert-danger">Vui lòng nhập vào</div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #closeButtonAdd class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- List product -->
+<div class="container">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Sale Price</th>
+            <th>Image</th>
+            <th>Decription</th>
+            <th>Số trang</th>
+            <th>Nhà xuất bản</th>
+            <th>Author</th>
+            <th>Số lượng</th>
+            <th>Enable</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+
+    <tbody *ngFor="let list of listProduct; let i = index">
+        <tr>
+            <td>{{list.id}}</td>
+            <td>{{list.name}}</td>
+            <td>{{list.price}}đ</td>
+            <td>{{list.sale_price}}đ</td>
+            <td><img src="assets/image/{{list.image}}" alt="Error" style="height: 50px; width: 50px;"></td>
+            <td>{{list.description}}</td>
+            <td>{{list.pages_number}}</td>
+            <td>{{list.nbx}}</td>
+            <td>{{list.author}}</td>
+            <td>{{list.quantity}}</td>
+            <td>{{list.enable}}</td>
+            <td> 
+                <button (click)="delete(list.id)" ><i class="far fa-trash-alt"></i></button> 
+                <button data-toggle="modal" data-target="#editProduct" (click)="openForm(list)"><i class="far fa-edit"></i></button>
+            </td>    
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
+<!-- Edit product -->
+
+<div id="editProduct" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">Edit Product</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="editProduct()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input formControlName="name" type="text" class="form-control" id="name"
+                    placeholder="Enter name product">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input formControlName="description" type="text" class="form-control" id="description"
+                  placeholder="Enter description product">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input formControlName="price" type="text" class="form-control" id="price"
+                    placeholder="Enter price product">
+            </div>
+            <div class="form-group">
+              <label for="sale_price">Sale Price</label>
+              <input formControlName="sale_price" type="text" class="form-control" id="sale_price"
+                  placeholder="Enter sale_price product">
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input formControlName="image" type="text" class="form-control" id="image"
+                    placeholder="Enter image product">
+            </div>
+            <div class="form-group">
+                <label for="pages_number">pages_number</label>
+                <input formControlName="pages_number" type="text" class="form-control" id="pages_number"
+                    placeholder="Enter pages_number product">
+            </div>
+            <!-- <div class="form-group">
+              <label for="type_Book_Id">type_Book_Id</label>
+              <input formControlName="type_Book_Id" type="text" class="form-control" id="type_Book_Id"
+                  placeholder="Enter type_Book_Id product">
+          </div> -->
+            <div class="form-group">
+                <label for="nbx">nbx</label>
+                <input formControlName="nbx" type="text" class="form-control" id="nbx"
+                    placeholder="Enter nbx product">
+            </div>
+            <div class="form-group">
+                <label for="author">author</label>
+                <input formControlName="author" type="text" class="form-control" id="author"
+                    placeholder="Enter author product">
+            </div>
+            <div class="form-group">
+              <label for="quantity">quantity</label>
+              <input formControlName="quantity" type="text" class="form-control" id="quantity"
+                  placeholder="Enter quantity product">
+            </div>
+            <div class="form-group">
+              <label for="enable">Enable</label>
+              <input formControlName="enable" type="text" class="form-control" id="enable"
+                  placeholder="Enter enable product">
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #closeButtonEdit class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

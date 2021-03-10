@@ -1,0 +1,51 @@
+.body {
+    background-color: white;
+}
+
+.left {
+    padding: 2vw;
+    border-right: rgb(214, 214, 214) 1px solid;
+}
+
+.left img {
+    width: 33vw;
+    height: auto;
+}
+
+
+.right {
+    padding: 2vw;
+    & .name {
+        font-size: 2vw;
+        font-weight: 600;
+        & i {
+            font-weight: 400;
+        }
+    }
+    & .sale-price {
+        font-size: 3vw;
+        font-weight: 700;
+        color: orange;
+        margin-left: 2vw;
+        & i{
+            font-size: 1.4vw;
+            font-weight: 400;
+        }
+    }
+    & .price {
+        font-size: 1.4vw;
+        font-weight: 600;
+    }
+    & .rate {
+        margin-bottom: 1vw;
+        & .checked {
+            color: yellow;
+        }
+    }
+
+}
+
+.description {
+    height: 25vh;
+    background-color: white;
+}

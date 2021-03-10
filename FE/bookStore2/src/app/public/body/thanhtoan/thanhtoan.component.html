@@ -1,0 +1,59 @@
+<div style="height: 75vh;">
+    <br>
+    <form style="background-color: white;" [formGroup]="formThanhToan" (ngSubmit)="submitThanhToan()">
+        <h4 style="margin-left: 2vw;">Vui lòng điền thông tin:</h4>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="name">Họ tên:</label>
+                    <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter your name">
+                    <div *ngIf="!this.formThanhToan.controls.name.valid &&  this.formThanhToan.controls.name.touched" class="alert alert-danger alert-sm">Vui lòng nhập vào</div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="phone">Số điện thoại:</label>
+                    <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Enter your phone">
+                    <div *ngIf="!this.formThanhToan.controls.phone.valid &&  this.formThanhToan.controls.phone.touched" class="alert alert-danger alert-sm">Vui lòng nhập vào</div>
+                  </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="address">Địa chỉ:</label>
+                    <input formControlName="address" type="text" class="form-control" id="address" placeholder="Enter your address">
+                  </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="payment">Vui lòng chọn phương thức thanh toán: </label>
+                    <br>
+                    <select id="payment" name="payment">
+                      <option value="Offline">Thanh toán khi nhận hàng</option>
+                      <option value="Online" disabled>Thanh toán trực tuyến</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3"><h4 style="margin-left: 2vw;">Tổng số tiền thanh toán:</h4></div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3"><h4>{{total}}đ</h4></div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 74vw;">Đặt Hàng</button>
+        <br>
+        <br>
+    </form>
+</div>
+    

@@ -1,0 +1,13 @@
+td {
+    font-size: 1vw;
+}
+
+th {
+    font-size: 1vw;
+}
+
+.addbutton {
+    margin-left: 15px;
+    display: inline-block;
+}
+
